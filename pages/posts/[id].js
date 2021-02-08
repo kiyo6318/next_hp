@@ -2,11 +2,11 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 
-export default function Post({ post }){
-  if(!post){
+export default function Post({ post }) {
+  if (!post) {
     return <div>Loading</div>;
   }
-  return(
+  return (
     <Layout title={post.title}>
       <p className="m-4">
         {"ID : "}
@@ -36,17 +36,17 @@ export default function Post({ post }){
   );
 }
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
   const paths = await getAllPostIds();
 
-  return{
+  return {
     paths,
     fallback: false,
-  }
+  };
 }
 
-export async function getStaticProps({ params }){
-  const {  post: post } = await getPostData(params.id);
+export async function getStaticProps({ params }) {
+  const post = await getPostData(params.id);
   return {
     props: {
       post,
